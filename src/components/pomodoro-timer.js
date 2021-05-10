@@ -13,11 +13,33 @@ class Pomodoro extends React.Component {
         }
         this.startTimer = this.startTimer.bind(this)
         this.countdown = this.countdown.bind(this)
+        this.pauseTimer = this.pauseTimer.bind(this)
 
+    }
+
+    secondsToTime(secs) {
+        let hours = Math.floor(secs / (60 * 60))
+
+        let divisor_for_minutes = secs % (60 * 60)
+        let minutes = Math.floor(divisor_for_minutes / 60)
+
+        let divisor_for_seconds = divisor_for_minutes % 60
+        let seconds = Math.ceil(divisor_for_seconds)
+
+        let obj = {
+            "h": hours,
+            "m": minutes,
+            "s": seconds,
+        }
+        return obj
     }
 
     startTimer() {
         setInterval(this.countdown, 1000)
+    }
+
+    pauseTimer() {
+        clearInterval(this.startTimer())
     }
 
     countdown() {
@@ -25,7 +47,7 @@ class Pomodoro extends React.Component {
         this.setState ({
             time: {
                 m: this.state.time.m,
-                s: seconds
+                s: seconds,
             }
         })
     }
@@ -49,7 +71,9 @@ class Pomodoro extends React.Component {
                 <div id="buttons">
                     <button
                     onClick={this.startTimer}>Play</button>
-                    <button>Pause</button>
+
+                    <button
+                    onClick={this.pauseTimer}>Pause</button>
                 </div>
             </div>
         )
