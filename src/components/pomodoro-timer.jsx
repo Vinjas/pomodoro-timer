@@ -1,6 +1,7 @@
 import React from "react"
 
-import secondsToTime from "../utils/secondsToTime.js"
+import {secondsToTime} from "../utils/secondsToTime.js"
+import {secondsToTimeNoZeroes} from "../utils/secondsToTime.js"
 import "./pomodoro-timer.css"
 
 var intervalID
@@ -25,6 +26,7 @@ class Pomodoro extends React.Component {
             startSession: {},
             startBreak: {},
             endSession: false,
+            totalSessions: 0,
         }
         this.startTimer = this.startTimer.bind(this)
         this.countdown = this.countdown.bind(this)
@@ -35,32 +37,33 @@ class Pomodoro extends React.Component {
         this.upTimeBreak = this.upTimeBreak.bind(this)
         this.downTimeBreak = this.downTimeBreak.bind(this)
     }
-    // UPDATE TOTAL SECONDS ON FIRST LOAD
+    // UPDATE TOTAL SECONDS ON FIRST MOUNT
     componentDidMount() {
         this.setState ({
             timeSession: secondsToTime(this.state.totalSeconds),
             breakSession: secondsToTime(this.state.breakSeconds),
-            startSession: secondsToTime(this.state.totalSeconds),
-            startBreak: secondsToTime(this.state.breakSeconds),
+            startSession: secondsToTimeNoZeroes(this.state.totalSeconds),
+            startBreak: secondsToTimeNoZeroes(this.state.breakSeconds),
             startSeconds: this.state.totalSeconds,
             startBreakSeconds: this.state.breakSeconds,
         })
     }
 
+    // CHECK WHEN SESSION AND BREAK ENDS, ADD 1 SESSION AND CHANGE BETWEEN THEM
     componentDidUpdate() {
         if(this.state.totalSeconds === 0 && this.state.endSession === false) {
-
             this.setState({
+                totalSessions: this.state.totalSessions + 1,
                 endSession: true,
                 totalSeconds: this.state.startSeconds
             })
         } else if (this.state.breakSeconds === 0 && this.state.endSession === true) {
-
             this.setState({
                 endSession: false,
                 breakSeconds: this.state.startBreakSeconds
             })
         }
+
     }
 
     // START AND STOP BUTTON FOR THE INTERVAL
@@ -68,9 +71,12 @@ class Pomodoro extends React.Component {
         if(intervalID) {
             clearInterval(intervalID)
         }
-        if(this.state.startSeconds != this.state.totalSeconds) {
+        if(this.state.startSeconds !== this.state.totalSeconds || this.state.breakSeconds !== this.state.startBreakSeconds) {
             this.setState ({
-                totalSeconds: this.state.startSeconds
+                totalSeconds: this.state.startSeconds,
+                startSession: secondsToTimeNoZeroes(this.state.startSeconds),
+                breakSeconds: this.state.startBreakSeconds,
+                breakSession: secondsToTimeNoZeroes(this.state.startBreakSeconds),
             })
         }
         if(this.state.timerOn === false) {
@@ -86,6 +92,7 @@ class Pomodoro extends React.Component {
         }
     }
 
+    // DEFINE INTERVAL AND PAUSE, DEPENDING IF ON SESSION OR ON BREAK
     countdown() {
         if(this.state.endSession === true) {
             if(this.state.timerOn === true) {
@@ -114,34 +121,34 @@ class Pomodoro extends React.Component {
         }
     }
 
-    // BUTTONS FOR SESSION TIME
+    // BUTTONS FOR ADJUSTING SESSION TIME
     upTimeSession() {
         this.setState ({
             startSeconds: this.state.startSeconds + 60,
-            startSession: secondsToTime(this.state.startSeconds + 60) 
+            startSession: secondsToTimeNoZeroes(this.state.startSeconds + 60) 
         })
     }
     downTimeSession() {
         if(this.state.startSeconds > 60) {
             this.setState ({
                 startSeconds: this.state.startSeconds - 60,
-                startSession: secondsToTime(this.state.startSeconds - 60),
+                startSession: secondsToTimeNoZeroes(this.state.startSeconds - 60),
             })
         }
     }
  
-    // BUTTONS FOR BREAK TIME
+    // BUTTONS FOR ADJUSTING BREAK TIME
     upTimeBreak() {
         this.setState ({
             startBreakSeconds: this.state.startBreakSeconds + 60,
-            startBreak: secondsToTime(this.state.startBreakSeconds + 60),
+            startBreak: secondsToTimeNoZeroes(this.state.startBreakSeconds + 60),
         })
     }
     downTimeBreak() {
         if(this.state.startBreakSeconds > 60) {
             this.setState ({
                 startBreakSeconds: this.state.startBreakSeconds - 60,
-                startBreak: secondsToTime(this.state.startBreakSeconds - 60),
+                startBreak: secondsToTimeNoZeroes(this.state.startBreakSeconds - 60),
             })
         }
     }
@@ -200,6 +207,10 @@ class Pomodoro extends React.Component {
                 <div id="playPause">
                     <button
                     onClick={this.startTimer}>Play/Pause</button>
+                </div>
+
+                <div id="numberOfSessions">
+                    <p>Total Sessions: {this.state.totalSessions}</p>
                 </div>
 
             </div>
