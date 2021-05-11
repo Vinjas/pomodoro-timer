@@ -1,0 +1,25 @@
+#timer-app {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+#set-time-row {
+    display: flex;
+}
+
+.setTime {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+.setButtons {
+    display: flex;
+}
+
+#timer {
+    font-size: 50px;
+    padding: 20px;
+}
