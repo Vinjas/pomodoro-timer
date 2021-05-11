@@ -1,7 +1,7 @@
 import React from "react"
+import Chart from "react-apexcharts"
 
-import {secondsToTime} from "../utils/secondsToTime.js"
-import {secondsToTimeNoZeroes} from "../utils/secondsToTime.js"
+import {secondsToTime, secondsToTimeNoZeroes} from "../utils/secondsToTime.js"
 import "./pomodoro-timer.css"
 
 var intervalID
@@ -63,7 +63,6 @@ class Pomodoro extends React.Component {
                 breakSeconds: this.state.startBreakSeconds
             })
         }
-
     }
 
     // START AND STOP BUTTON FOR THE INTERVAL

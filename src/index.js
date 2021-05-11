@@ -1,4 +1,4 @@
 import ReactDOM from "react-dom"
-import Pomodoro from "./components/pomodoro-timer.jsx"
+import PomodoroContainer from "./containers/pomodoroContainer"
 
-ReactDOM.render(<Pomodoro />, document.getElementById("root"))
+ReactDOM.render(<PomodoroContainer />, document.getElementById("root"))
