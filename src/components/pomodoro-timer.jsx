@@ -36,7 +36,6 @@ class Pomodoro extends React.Component {
             onSession: false,
 
             percentage: 100,
-            percentageBreak: 100,
 
             totalSessions: 0,
         }
@@ -146,7 +145,7 @@ class Pomodoro extends React.Component {
                 })
             }
         }
-        
+        // UPDATE RADICAL CHART PERCENTAGE
         if (this.state.endSession) {
             if (this.state.breakSeconds <= multiplesOfSeconds[this.state.percentage - 1]) {
                 this.setState({
@@ -223,20 +222,56 @@ class Pomodoro extends React.Component {
     render() {
         // DEFINE RADIAL CHART PROPERTIES
         const chartOptions = {
-            series: [this.state.percentage],
+            series: [this.state.percentage],            
             
             options: {
                 chart: {
                     height: 350,
                     type: 'radialBar',
                 },
+                
+                colors: ["#20E647"],
+                
                 plotOptions: {
                     radialBar: {
                         hollow: {
+                            margin: 0,
                             size: '70%',
-                        }
+                            background: '#fff',
+                            image: undefined,
+                            imageOffsetX: 0,
+                            imageOffsetY: 0,
+                            position: 'front',
+
+                        },
+                        dataLabels: {
+                            show: true,
+                            name: {
+                                show: true,
+                                offsetY: 15,
+                                color: "#888",
+                                fontSize: "50px"
+                            },
+                            value: {
+                                show: true,
+                            }
+                        },
                     },
                 },
+                fill: {
+                    type: "gradient",
+                    gradient: {
+                      shade: "dark",
+                      type: "vertical",
+                      gradientToColors: ["#87D4F9"],
+                      stops: [0, 100]
+                    }
+                  },
+                
+                stroke: {
+                    lineCap: "round"
+                },
+
                 labels: [this.state.timeSession.m + ":" + this.state.timeSession.s],
             },
         }
@@ -249,13 +284,50 @@ class Pomodoro extends React.Component {
                     height: 350,
                     type: 'radialBar',
                 },
+                
+                colors: ["#d30808"],
+                
                 plotOptions: {
                     radialBar: {
                         hollow: {
+                            margin: 0,
                             size: '70%',
-                        }
+                            background: '#fff',
+                            image: undefined,
+                            imageOffsetX: 0,
+                            imageOffsetY: 0,
+                            position: 'front',
+
+                        },
+                        dataLabels: {
+                            show: true,
+                            name: {
+                                show: true,
+                                offsetY: 15,
+                                color: "#888",
+                                fontSize: "50px"
+                            },
+                            value: {
+                                show: true,
+                            }
+                        },
                     },
                 },
+                fill: {
+                    type: "gradient",
+                    gradient: {
+                      shade: "dark",
+                      type: "vertical",
+                      gradientToColors: ["#87D4F9"],
+                      stops: [0, 100]
+                    }
+                  },
+                
+                stroke: {
+                    lineCap: "round"
+                },
+
+
                 labels: [this.state.breakSession.m + ":" + this.state.breakSession.s],
             },
         }
