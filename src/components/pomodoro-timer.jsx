@@ -200,22 +200,31 @@ class Pomodoro extends React.Component {
     }
 
     resetState() {
+        if(this.state.timerOn) {
+            this.startTimer()
+        }
+
         this.setState ({
             // CHANGE INITIAL SECOND TO 25 + 5
-            totalSeconds: 100,
-            breakSeconds: 110,
+            totalSeconds: 120,
+            breakSeconds: 100,
             // #############################
-            timerOn: false,
-            endSession: false,
+
             onSession: false,
+
+            endSession: false,
+
             percentage: 100,
             totalSessions: 0,
+
             timeSession: secondsToTime(this.state.startSeconds),
             breakSession: secondsToTime(this.state.startBreakSeconds),
+
             startSession: secondsToTimeNoZeroes(this.state.startSeconds),
             startBreak: secondsToTimeNoZeroes(this.state.startBreakSeconds),
-            startSeconds: this.state.totalSeconds,
-            startBreakSeconds: this.state.breakSeconds,
+
+            startSeconds: this.state.startSeconds,
+            startBreakSeconds: this.state.startBreakSeconds,
         })
     }
 
@@ -230,7 +239,7 @@ class Pomodoro extends React.Component {
                     type: 'radialBar',
                 },
                 
-                colors: ["#20E647"],
+                colors: ["#d30808"],
                 
                 plotOptions: {
                     radialBar: {
@@ -242,14 +251,32 @@ class Pomodoro extends React.Component {
                             imageOffsetX: 0,
                             imageOffsetY: 0,
                             position: 'front',
-
+                            dropShadow: {
+                                enabled: true,
+                                top: 3,
+                                left: 0,
+                                blur: 4,
+                                opacity: 0.24
+                            }
                         },
+                        track: {
+                            background: '#fff',
+                            strokeWidth: '67%',
+                            margin: 0, // margin is in pixels
+                            dropShadow: {
+                              enabled: true,
+                              top: -3,
+                              left: 0,
+                              blur: 4,
+                              opacity: 0.35
+                            }
+                          },
                         dataLabels: {
                             show: true,
                             name: {
                                 show: true,
                                 offsetY: 15,
-                                color: "#888",
+                                color: "#353535",
                                 fontSize: "50px"
                             },
                             value: {
@@ -263,7 +290,7 @@ class Pomodoro extends React.Component {
                     gradient: {
                       shade: "dark",
                       type: "vertical",
-                      gradientToColors: ["#87D4F9"],
+                      gradientToColors: ["#541919"],
                       stops: [0, 100]
                     }
                   },
@@ -285,7 +312,7 @@ class Pomodoro extends React.Component {
                     type: 'radialBar',
                 },
                 
-                colors: ["#d30808"],
+                colors: ["#20E647"],
                 
                 plotOptions: {
                     radialBar: {
@@ -297,14 +324,32 @@ class Pomodoro extends React.Component {
                             imageOffsetX: 0,
                             imageOffsetY: 0,
                             position: 'front',
-
+                            dropShadow: {
+                                enabled: true,
+                                top: 3,
+                                left: 0,
+                                blur: 4,
+                                opacity: 0.24
+                            }
+                        },
+                        track: {
+                            background: '#fff',
+                            strokeWidth: '67%',
+                            margin: 0, // margin is in pixels
+                            dropShadow: {
+                                enabled: true,
+                                top: -3,
+                                left: 0,
+                                blur: 4,
+                                opacity: 0.35
+                            }
                         },
                         dataLabels: {
                             show: true,
                             name: {
                                 show: true,
                                 offsetY: 15,
-                                color: "#888",
+                                color: "#353535",
                                 fontSize: "50px"
                             },
                             value: {
@@ -391,16 +436,6 @@ class Pomodoro extends React.Component {
                         height={350} />}
                 </div>
 
-                {/*<div id="timer">
-                {this.state.endSession 
-                    ? this.state.breakSession.m 
-                    : <Chart 
-                        options={chartOptions.options} 
-                        series={chartOptions.series} 
-                        type="radialBar" 
-                        height={350} />}
-                </div>*/}
-
                 <div id="playPause">
                     <button
                     onClick={this.startTimer}>Play/Pause</button>
@@ -408,15 +443,7 @@ class Pomodoro extends React.Component {
 
                 <div id="numberOfSessions">
                     <p>Total Sessions: {this.state.totalSessions}</p>
-                </div>
-
-                {/*<div id="chart">
-                    <Chart 
-                    options={chartOptions.options} 
-                    series={chartOptions.series} 
-                    type="radialBar" 
-                    height={350} />
-                </div> */}               
+                </div>            
 
                 <div>
                     <button
