@@ -1,5 +1,6 @@
 import React from "react"
 import Chart from "react-apexcharts"
+import { Helmet } from "react-helmet"
 
 import {secondsToTime, secondsToTimeNoZeroes} from "../utils/secondsToTime.js"
 import secondsToPercent from "../utils/secondsToPercent"
@@ -235,70 +236,41 @@ class Pomodoro extends React.Component {
             
             options: {
                 chart: {
-                    height: 350,
+                    height: 400,
                     type: 'radialBar',
-                },
-                
-                colors: ["#d30808"],
-                
+                },                
+                colors: ["#fff"], 
                 plotOptions: {
                     radialBar: {
                         hollow: {
                             margin: 0,
-                            size: '70%',
-                            background: '#fff',
-                            image: undefined,
-                            imageOffsetX: 0,
-                            imageOffsetY: 0,
-                            position: 'front',
-                            dropShadow: {
-                                enabled: true,
-                                top: 3,
-                                left: 0,
-                                blur: 4,
-                                opacity: 0.24
-                            }
+                            size: '85%',
                         },
                         track: {
-                            background: '#fff',
-                            strokeWidth: '67%',
+                            background: '#FF9090',
+                            strokeWidth: '100%',
                             margin: 0, // margin is in pixels
-                            dropShadow: {
-                              enabled: true,
-                              top: -3,
-                              left: 0,
-                              blur: 4,
-                              opacity: 0.35
-                            }
+
                           },
                         dataLabels: {
                             show: true,
                             name: {
                                 show: true,
-                                offsetY: 15,
-                                color: "#353535",
-                                fontSize: "50px"
+                                offsetY: 20,
+                                color: "#fff",
+                                fontSize: "55px",
+                                fontFamily: "Spartan",
+                                fontWeight: 'thin',
                             },
                             value: {
-                                show: true,
+                                show: false,
                             }
                         },
                     },
                 },
-                fill: {
-                    type: "gradient",
-                    gradient: {
-                      shade: "dark",
-                      type: "vertical",
-                      gradientToColors: ["#541919"],
-                      stops: [0, 100]
-                    }
-                  },
-                
                 stroke: {
                     lineCap: "round"
                 },
-
                 labels: [this.state.timeSession.m + ":" + this.state.timeSession.s],
             },
         }
@@ -308,147 +280,174 @@ class Pomodoro extends React.Component {
             
             options: {
                 chart: {
-                    height: 350,
+                    height: 400,
                     type: 'radialBar',
-                },
-                
-                colors: ["#20E647"],
-                
+                },                
+                colors: ["#fff"], 
                 plotOptions: {
                     radialBar: {
                         hollow: {
                             margin: 0,
-                            size: '70%',
-                            background: '#fff',
-                            image: undefined,
-                            imageOffsetX: 0,
-                            imageOffsetY: 0,
-                            position: 'front',
-                            dropShadow: {
-                                enabled: true,
-                                top: 3,
-                                left: 0,
-                                blur: 4,
-                                opacity: 0.24
-                            }
+                            size: '85%',
                         },
                         track: {
-                            background: '#fff',
-                            strokeWidth: '67%',
+                            background: '#FF9090',
+                            strokeWidth: '100%',
                             margin: 0, // margin is in pixels
-                            dropShadow: {
-                                enabled: true,
-                                top: -3,
-                                left: 0,
-                                blur: 4,
-                                opacity: 0.35
-                            }
-                        },
+
+                          },
                         dataLabels: {
                             show: true,
                             name: {
                                 show: true,
-                                offsetY: 15,
-                                color: "#353535",
-                                fontSize: "50px"
+                                offsetY: 20,
+                                color: "#fff",
+                                fontSize: "55px",
+                                fontFamily: "Spartan",
+                                fontWeight: 'thin',
                             },
                             value: {
-                                show: true,
+                                show: false,
                             }
                         },
                     },
                 },
-                fill: {
-                    type: "gradient",
-                    gradient: {
-                      shade: "dark",
-                      type: "vertical",
-                      gradientToColors: ["#87D4F9"],
-                      stops: [0, 100]
-                    }
-                  },
-                
                 stroke: {
                     lineCap: "round"
                 },
-
-
                 labels: [this.state.breakSession.m + ":" + this.state.breakSession.s],
             },
         }
 
-
         return (
-            <div id="timer-app">
-                <div id="set-time-row">
-                    
-                    <div 
-                    id="session"
-                    className="setTime">
-                        <p>Session time</p>
-                        <div 
-                        id="time-session"
-                        className="setButtons">
-                            <button
-                            className="buttonUpTime"
-                            onClick={this.upTimeSession}>Up time</button>
-                            
-                            <p>{this.state.startSession.m}:00</p>
-
-                            <button
-                            className="buttonDownTime"
-                            onClick={this.downTimeSession}>Down time</button>
-                        </div>
-
-                    </div>
-                    
-                    <div 
-                    id="breaks"
-                    className="setTime">
-                        <p>Break time</p>
-                        <div 
-                        id="break-session"
-                        className="setButtons">
-                            <button
-                            onClick={this.upTimeBreak}>Up time</button>
-
-                            <p>{this.state.startBreak.m}:00</p>
-
-                            <button
-                            onClick={this.downTimeBreak}>Down time</button>
-                        </div>
-
-                    </div>
-
-                </div>
+            <div id="timer-app">               
+                <Helmet>
+                    <style>
+                        {"body {background: linear-gradient(180deg, #FB5945 0%, #F53447 90.55%), #FC5045; height: 100%; margin: 0; background-repeat: no-repeat; background-attachment: fixed;}"}
+                    </style>
+                </Helmet>               
                 
-                <div id="chart">
-                    {this.state.endSession 
-                    ? <Chart 
-                        options={chartBreak.options} 
-                        series={chartOptions.series} 
-                        type="radialBar" 
-                        height={350} />
-                    : <Chart 
-                        options={chartOptions.options} 
-                        series={chartOptions.series} 
-                        type="radialBar" 
-                        height={350} />}
+                <div id="app">
+                    <div id="sessionOrBreak">
+                        {this.state.endSession
+                        ? "Take a break"
+                        : "Focus on your task"}
+                    </div>
+
+                    <div id="set-time-row">
+                        
+                        <div 
+                        id="session"
+                        className="setTime">
+                            Work
+                            <div 
+                            id="time-session"
+                            className="setButtons">
+                                <button
+                                className="buttonsSetTime"
+                                onClick={this.upTimeSession}>
+                                    <svg 
+                                    aria-hidden="true" focusable="false" data-prefix="fas" 
+                                    data-icon="arrow-up" class="svg-inline--fa fa-arrow-up fa-w-14" role="img" 
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path fill="#FF9090" d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"></path>
+                                    </svg>
+                                
+                                </button>
+                                
+                                {this.state.startSession.m}:00
+
+                                <button
+                                className="buttonsSetTime"
+                                onClick={this.downTimeSession}>
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fas" 
+                                    data-icon="arrow-down" class="svg-inline--fa fa-arrow-down fa-w-14" role="img" 
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path fill="#FF9090" d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z"></path>
+                                    </svg>                            
+                                </button>
+                            </div>
+
+                        </div>
+                        
+                        <div 
+                        id="breaks"
+                        className="setTime">
+                            Break
+                            <div 
+                            id="break-session"
+                            className="setButtons">
+                                <button
+                                className="buttonsSetTime"
+                                onClick={this.upTimeBreak}>
+                                    <svg 
+                                    aria-hidden="true" focusable="false" data-prefix="fas" 
+                                    data-icon="arrow-up" class="svg-inline--fa fa-arrow-up fa-w-14" role="img" 
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path fill="#FF9090" d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"></path>
+                                    </svg>
+                                </button>
+
+                                {this.state.startBreak.m}:00
+
+                                <button
+                                className="buttonsSetTime"
+                                onClick={this.downTimeBreak}>
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fas" 
+                                    data-icon="arrow-down" class="svg-inline--fa fa-arrow-down fa-w-14" role="img" 
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path fill="#FF9090" d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z"></path>
+                                    </svg>                            
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div id="chart">
+                        {this.state.endSession 
+                        ? <Chart 
+                            options={chartBreak.options} 
+                            series={chartOptions.series} 
+                            type="radialBar" 
+                            height={350} />
+                        : <Chart 
+                            options={chartOptions.options} 
+                            series={chartOptions.series} 
+                            type="radialBar" 
+                            height={350} />}
+                    </div>
+
+                    <div id="roundAndPlay">
+                        <div id="numberOfSessions">
+                            Round {this.state.totalSessions}
+                        </div>   
+
+                        <div id="playPause">
+                            <button
+                            id="playButton"
+                            onClick={this.startTimer}>
+                                {this.state.timerOn
+                                ?
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pause" class="svg-inline--fa fa-pause fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#F63846" d="M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z"></path></svg>
+                                :
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="play" class="svg-inline--fa fa-play fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#F63846" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path></svg>
+                                }
+                            
+                            </button>
+                        </div>         
+                    </div>            
+                    
                 </div>
 
-                <div id="playPause">
-                    <button
-                    onClick={this.startTimer}>Play/Pause</button>
+                <div id="footbar">
+                    <div>
+                        <button
+                        onClick={this.resetState}>Reset timer</button>
+                    </div>
                 </div>
 
-                <div id="numberOfSessions">
-                    <p>Total Sessions: {this.state.totalSessions}</p>
-                </div>            
-
-                <div>
-                    <button
-                    onClick={this.resetState}>Reset timer</button>
-                </div>
 
             </div>
         )

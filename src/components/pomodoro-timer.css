@@ -1,8 +1,53 @@
+@font-face {
+    font-family: "Raleway";
+    src: local("Raleway"),
+     url("../fonts/Raleway-VariableFont_wght.ttf") format("truetype");
+
+    }
+@font-face {
+    font-family: "Spartan";
+    src: local("Spartan"),
+     url("../fonts/Spartan-VariableFont_wght.ttf") format("truetype");
+    font-weight: 300;
+    }
+
 #timer-app {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
+    color: #fff;
+    font-family: "Raleway";
+    font-size: 20px;
+    font-weight: 300;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background-attachment: fixed;
+    /*max-height: 640px;*/
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 90vh;
+    width: 100%;
+    
+}
+
+#footbar {
+    flex-basis: 10vh;
+    background-color: #fff;
+    width: 100%;
+}
+
+
+
+#sessionOrBreak {
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 20px;
 }
 
 #set-time-row {
@@ -14,16 +59,45 @@
     flex-direction: column;
     align-items: center;
     padding: 10px;
+    font-weight: 500;
 }
+
 .setButtons {
     display: flex;
+    font-family: "Spartan";
+    font-size: 16px;
+    font-weight: 500;
 }
 
 #timer {
     font-size: 50px;
-    padding: 20px;
 }
 
-.buttonUpTime {
-    
+.buttonsSetTime {
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff00;
+    border: none;
+}
+
+#numberOfSessions {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+#playPause {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#playButton {
+    height: 140px;
+    width: 140px;
+    border: none;
+    background-color: #fff;
+    border-radius: 100px;
+    padding: 45px;
+    position:absolute;
+    margin-top: 30px;
 }
