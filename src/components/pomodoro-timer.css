@@ -11,22 +11,25 @@
     font-weight: 300;
     }
 
+/* CONTAINER */
 #timer-app {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
+    
     color: #fff;
     font-family: "Raleway";
-    font-size: 20px;
+    font-size: 14px;
     font-weight: 300;
-    height: 100%;
-    width: 100%;
-    margin: 0;
+    
+    max-height: 100vh;
+
     background-attachment: fixed;
     /*max-height: 640px;*/
 }
 
+/* APP */
 #app {
     display: flex;
     flex-direction: column;
@@ -35,25 +38,15 @@
     width: 100%;
     
 }
-
-#footbar {
-    flex-basis: 10vh;
-    background-color: #fff;
-    width: 100%;
-}
-
-
-
 #sessionOrBreak {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
-    margin-top: 20px;
+    margin-top: 30px;
+    padding-bottom: 30px ;
 }
-
 #set-time-row {
     display: flex;
 }
-
 .setTime {
     display: flex;
     flex-direction: column;
@@ -61,43 +54,78 @@
     padding: 10px;
     font-weight: 500;
 }
-
 .setButtons {
     display: flex;
     font-family: "Spartan";
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
+    justify-content: center;
+    align-items: center;
 }
-
-#timer {
-    font-size: 50px;
-}
-
 .buttonsSetTime {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     background-color: #ffffff00;
     border: none;
 }
-
 #numberOfSessions {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
 }
-
 #playPause {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 #playButton {
-    height: 140px;
-    width: 140px;
+    height: 120px;
+    width: 120px;
     border: none;
     background-color: #fff;
     border-radius: 100px;
-    padding: 45px;
-    position:absolute;
+    padding: 40px;
+    position: relative;
     margin-top: 30px;
+}
+
+/* FOOTBAR */
+#footbar {
+    flex-basis: 10vh;
+    background: #fff;
+    width: 100%;
+}
+#footbarItems {
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+    height: 100%;
+}
+#resetButton, #uselessButton  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 20px 10px 20px;
+    height: 55px;
+    width: 55px;
+    color: #c2c2c2;
+    background: #ffffff00;
+    border: none;
+}
+
+@media (max-height: 674px) {
+    #playButton {
+        position: absolute;
+        flex-basis: 10vh;
+    }
+    #footbar {
+        flex-basis: 10vh;
+    }
+}
+@media (max-width: 285px) {
+    #playButton {
+        position: relative;
+    }
 }
