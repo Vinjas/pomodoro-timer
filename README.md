@@ -1,4 +1,4 @@
-# Clena Pomodoro Timer - Web App with React JS
+# Clean Pomodoro Timer - Web App with React JS
 > https://clean-pomodoro.surge.sh/
 ## Introduction
 *Clean Pomodoro Timer* is a simple Web App created with React JS.
